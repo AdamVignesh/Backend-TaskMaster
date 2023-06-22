@@ -96,3 +96,4 @@ C:\Users\HP\Desktop\capstone\Backend-TaskMaster\obj\Debug\net6.0\refint\Backend-
 C:\Users\HP\Desktop\capstone\Backend-TaskMaster\obj\Debug\net6.0\Backend-TaskMaster.pdb
 C:\Users\HP\Desktop\capstone\Backend-TaskMaster\obj\Debug\net6.0\Backend-TaskMaster.genruntimeconfig.cache
 C:\Users\HP\Desktop\capstone\Backend-TaskMaster\obj\Debug\net6.0\ref\Backend-TaskMaster.dll
+C:\Users\HP\Desktop\capstone\Backend-TaskMaster\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll

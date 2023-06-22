@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nJigldJx/v/zUxd5OfVDa89UntRU9tmjjDAXLwKT30J3UiVlctuptOVffJLh3Pi4XLq/OeIqV9bNazPU28lPEA==",
+  "dgSpecHash": "7VMW5vngtsX+LOcZpekbFNe1Uth68UFYfENM9VeMBABJhM3OZNKVyl7tJt1ChhdS8NJOenliJH3wqvkKPd8ZIQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
