@@ -30,33 +30,29 @@ namespace capstone.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var user = new UserModel { UserName = model.Name, Email = model.Email, Role = model.Role };
+                    Console.WriteLine(model.Name+"==================================================");
+                    var user = new UserModel { UserName = model.Name, Email = model.Email, Role = model.Role,ImgUrl=model.ImgUrl};
                     var result = await _userManager.CreateAsync(user, model.Password);
+                Console.WriteLine(user + "==================================================");
 
-                    if (result.Succeeded)
+                if (result.Succeeded)
                     {
                         return Ok("Registered");
                     }
                     else
                     {
                         var errors = result.Errors.Select(e => e.Description);
-                        return BadRequest(errors);
+                        Console.WriteLine("errors ------------------------------------------- "+errors.ToList());
+                        return BadRequest(errors.ToList());
                     }
-                }
-                else
-                {
-                    Console.WriteLine("fail");
-                }
+               
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                return BadRequest(ex.ToString());
             }
-            
 
-            return BadRequest(ModelState);
         }
 
 
