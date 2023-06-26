@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj": {}
+    "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\Backend-TaskMaster.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj": {
+    "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\Backend-TaskMaster.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
         "projectName": "Backend-TaskMaster",
-        "projectPath": "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",

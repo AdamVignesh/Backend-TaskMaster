@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7VMW5vngtsX+LOcZpekbFNe1Uth68UFYfENM9VeMBABJhM3OZNKVyl7tJt1ChhdS8NJOenliJH3wqvkKPd8ZIQ==",
+  "dgSpecHash": "swa2cnJixCzcv8Ao3vz+wEDXbI+WwzFfdZAnPufGTFG9OmW2pYbWNJH1IAuRAjMXYt62jpjD1P9qQxTH4JytnA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\capstone\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\Backend-TaskMaster\\Backend-TaskMaster.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
