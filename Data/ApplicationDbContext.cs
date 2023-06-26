@@ -11,6 +11,8 @@ namespace capstone.Data
         public DbSet<UserModel> Users { get; set; }
 
         public DbSet<ProjectsModel> Projects { get; set; }
+        public DbSet<UserProjectRelation> UserProjectRelation { get; set; }
+
 
     }
 }
