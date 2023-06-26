@@ -1,8 +1,10 @@
-﻿using capstone.Models;
+﻿using Azure.Core;
+using capstone.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -68,6 +70,7 @@ namespace capstone.Controllers
 
                 }
                 var result = await _userManager.CheckPasswordAsync(user, model.Password);
+                Console.WriteLine(result + "============result=======");
                 if (result)
                 {
                     String token =  CreateToken(user);
@@ -85,6 +88,34 @@ namespace capstone.Controllers
             return Unauthorized(); // Invalid password
         }
 
+
+        [HttpGet("getUserDetails")]
+        public async Task<IActionResult>GetUserDetails(string accessToken)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var decodedToken = tokenHandler.ReadJwtToken(accessToken);
+                Console.WriteLine("decoded token");
+
+
+                IEnumerable<Claim> claims = decodedToken.Claims;
+            
+                string username = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name)?.Value;
+                Console.WriteLine(username);
+
+                UserModel user = await _userManager.FindByNameAsync(username);
+
+                
+                return Ok(new {userDetails = user});
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+                return BadRequest("Invaild Access Token");
+        }
         private string CreateToken(UserModel user)
         {
             List<Claim> claims = new List<Claim>
@@ -98,14 +129,14 @@ namespace capstone.Controllers
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.Now.AddDays(2),
-                signingCredentials:creds
+                signingCredentials: creds
                 );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-                
+
             return jwt;
         }
-   
+
     }
 }
 
