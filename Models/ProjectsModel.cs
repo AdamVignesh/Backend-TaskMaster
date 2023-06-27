@@ -14,7 +14,7 @@ namespace capstone.Models
         public string Project_Status { get; set;}
         public int Project_Progress { get; set;}
         public DateTime Start_Date { get; set; }
-        public DateTime End_Date { get; set;}
+        public DateTime? End_Date { get; set;}
         public UserModel User { get; set; }
 
     }
