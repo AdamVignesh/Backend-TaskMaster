@@ -40,11 +40,6 @@ namespace capstone.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProjectsModel(string id)
         {
-          if (_context.Projects == null)
-          {
-              return NotFound();
-          }
-            Console.WriteLine(id + "id=======================================");
             var projects = await _context.Projects.Where(p => p.User.Id == id).ToListAsync();
 
             //var projectsModel = await _context.Projects.FindAsync().Where(User=>User.created_By=id);
