@@ -1,7 +1,9 @@
 ﻿using Azure.Core;
+using capstone.Data;
 using capstone.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
@@ -18,11 +20,13 @@ namespace capstone.Controllers
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
 
-        public AuthController(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IConfiguration configuration)
+        public AuthController(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IConfiguration configuration, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
             _configuration = configuration;
         }
 
@@ -116,6 +120,26 @@ namespace capstone.Controllers
             }
                 return BadRequest("Invaild Access Token");
         }
+
+        [HttpGet("getUserDetailsUsingRole")]
+        public async Task<IActionResult> GetUserDetailsUsingRole(string role)
+        {
+            try
+            {
+                var  user = await _userManager.Users.Where(user=>user.Role == role).ToListAsync();
+              //  UserModel user = await _userManager.FindByNameAsync(username);
+
+
+                return Ok(new { userDetails = user });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return BadRequest("Invaild Access Token");
+        }
+
         private string CreateToken(UserModel user)
         {
             List<Claim> claims = new List<Claim>

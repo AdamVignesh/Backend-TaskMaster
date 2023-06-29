@@ -34,20 +34,21 @@ namespace capstone.Controllers
 
         // GET: api/UserProjectRelations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserProjectRelation>> GetUserProjectRelation(int id)
+        public async Task<ActionResult<UserProjectRelation>> GetUserProjectRelation(string id)
         {
           if (_context.UserProjectRelation == null)
           {
               return NotFound();
           }
-            var userProjectRelation = await _context.UserProjectRelation.FindAsync(id);
-
-            if (userProjectRelation == null)
+            var userProjects =  _context.UserProjectRelation.Include(p => p.Projects).Include(p => p.User).Where(p => p.User.Id == id).Select(p=> new {projects=p.Projects}).ToList();
+            foreach(var item in userProjects)
             {
-                return NotFound();
+
+            Console.WriteLine(item.projects.Project_Title+"=========================user projects===============================");
             }
 
-            return userProjectRelation;
+          
+            return Ok(userProjects);
         }
 
         // PUT: api/UserProjectRelations/5
@@ -86,6 +87,7 @@ namespace capstone.Controllers
         [HttpPost]
         public async Task<ActionResult<UserProjectRelation>> PostUserProjectRelation(UserProjectRelationInput UserProjectRelationInput)
         {
+
             int members_iterator =0;
             UserModel[] members = new UserModel[UserProjectRelationInput.members.Length];
 
@@ -97,7 +99,6 @@ namespace capstone.Controllers
                 members[members_iterator++] = User;
             }
 
-            
 
             foreach (UserModel user in members)
             {
