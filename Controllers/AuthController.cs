@@ -122,14 +122,16 @@ namespace capstone.Controllers
         }
 
         [HttpGet("getUserDetailsUsingRole")]
-        public async Task<IActionResult> GetUserDetailsUsingRole(string role)
+        public async Task<IActionResult> GetUserDetailsUsingRole(string role,int project_id)
         {
             try
             {
-                var  user = await _userManager.Users.Where(user=>user.Role == role).ToListAsync();
+               // var  user = await _userManager.Users.Where(user=>user.Role == role).ToListAsync();
               //  UserModel user = await _userManager.FindByNameAsync(username);
 
-
+                var user =  _context.Users.Where(user => user.Role == role && ! _context.UserProjectRelation.Where(rel => rel.Projects.Project_id == project_id).Select(rel => rel.User.Id)
+            .Contains(user.Id))
+    .ToList();
                 return Ok(new { userDetails = user });
 
             }
