@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using capstone.Data;
 
@@ -11,9 +12,11 @@ using capstone.Data;
 namespace capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230702112449_tasks table added")]
+    partial class taskstableadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,76 +273,6 @@ namespace capstone.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("capstone.Models.TaskProjectRelationModel", b =>
-                {
-                    b.Property<int>("Task_Project_Relation_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Task_Project_Relation_id"));
-
-                    b.Property<int>("ProjectsProject_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Taskstask_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Task_Project_Relation_id");
-
-                    b.HasIndex("ProjectsProject_id");
-
-                    b.HasIndex("Taskstask_id");
-
-                    b.ToTable("TaskProjectRelationTable");
-                });
-
-            modelBuilder.Entity("capstone.Models.TasksModel", b =>
-                {
-                    b.Property<int>("task_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("task_id"));
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("deadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("end_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("file_url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("start_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("task_description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("task_title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("weightage")
-                        .HasColumnType("int");
-
-                    b.HasKey("task_id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserTasks");
-                });
-
             modelBuilder.Entity("capstone.Models.UserProjectRelation", b =>
                 {
                     b.Property<int>("User_Project_Relation_id")
@@ -434,36 +367,6 @@ namespace capstone.Migrations
                     b.HasOne("capstone.Models.UserModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("capstone.Models.TaskProjectRelationModel", b =>
-                {
-                    b.HasOne("capstone.Models.ProjectsModel", "Projects")
-                        .WithMany()
-                        .HasForeignKey("ProjectsProject_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("capstone.Models.TasksModel", "Tasks")
-                        .WithMany()
-                        .HasForeignKey("Taskstask_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Projects");
-
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("capstone.Models.TasksModel", b =>
-                {
-                    b.HasOne("capstone.Models.UserModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });

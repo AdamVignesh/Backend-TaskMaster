@@ -13,6 +13,11 @@ namespace capstone.Data
         public DbSet<ProjectsModel> Projects { get; set; }
         public DbSet<UserProjectRelation> UserProjectRelation { get; set; }
 
+        public DbSet<TasksModel> UserTasks { get; set; }
+       
+        public DbSet<TaskProjectRelationModel> TaskProjectRelationTable { get; set; }
+
+
 
     }
 }

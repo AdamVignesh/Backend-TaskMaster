@@ -25,10 +25,10 @@ namespace capstone.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserProjectRelation>>> GetUserProjectRelation()
         {
-          if (_context.UserProjectRelation == null)
-          {
-              return NotFound();
-          }
+            if (_context.UserProjectRelation == null)
+            {
+                return NotFound();
+            }
             return await _context.UserProjectRelation.ToListAsync();
         }
 
@@ -36,18 +36,29 @@ namespace capstone.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserProjectRelation>> GetUserProjectRelation(string id)
         {
-          if (_context.UserProjectRelation == null)
-          {
-              return NotFound();
-          }
-            var userProjects =  _context.UserProjectRelation.Include(p => p.Projects).Include(p => p.User).Where(p => p.User.Id == id).Select(p=> new {projects=p.Projects}).ToList();
-            foreach(var item in userProjects)
+            if (_context.UserProjectRelation == null)
             {
-
-            Console.WriteLine(item.projects.Project_Title+"=========================user projects===============================");
+                return NotFound();
             }
+            var userProjects = _context.UserProjectRelation.Include(p => p.Projects).Include(p => p.User).Where(p => p.User.Id == id).Select(p => p.Projects).ToList();
 
-          
+
+
+            return Ok(userProjects);
+        }
+
+
+        [HttpGet("getFromProjectId/{project_id}")]
+        public async Task<ActionResult<UserProjectRelation>> GetUserProjectRelationWithProjectId(int project_id)
+        {
+            if (_context.UserProjectRelation == null)
+            {
+                return NotFound();
+            }
+            var userProjects = _context.UserProjectRelation.Include(p => p.Projects).Include(p => p.User).Where(p => p.Projects.Project_id == project_id).Select(p => p.User).ToList();
+
+
+
             return Ok(userProjects);
         }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using capstone.Data;
 
@@ -11,9 +12,11 @@ using capstone.Data;
 namespace capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230702114731_taskProjectRelation table added")]
+    partial class taskProjectRelationtableadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +273,7 @@ namespace capstone.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("capstone.Models.TaskProjectRelationModel", b =>
+            modelBuilder.Entity("capstone.Models.TaskProjectRelation", b =>
                 {
                     b.Property<int>("Task_Project_Relation_id")
                         .ValueGeneratedOnAdd()
@@ -290,10 +293,10 @@ namespace capstone.Migrations
 
                     b.HasIndex("Taskstask_id");
 
-                    b.ToTable("TaskProjectRelationTable");
+                    b.ToTable("TaskProjectRelation");
                 });
 
-            modelBuilder.Entity("capstone.Models.TasksModel", b =>
+            modelBuilder.Entity("capstone.Models.Tasks", b =>
                 {
                     b.Property<int>("task_id")
                         .ValueGeneratedOnAdd()
@@ -305,8 +308,8 @@ namespace capstone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("deadline")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("deadline")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("end_date")
                         .HasColumnType("datetime2");
@@ -337,7 +340,7 @@ namespace capstone.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserTasks");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("capstone.Models.UserProjectRelation", b =>
@@ -438,7 +441,7 @@ namespace capstone.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("capstone.Models.TaskProjectRelationModel", b =>
+            modelBuilder.Entity("capstone.Models.TaskProjectRelation", b =>
                 {
                     b.HasOne("capstone.Models.ProjectsModel", "Projects")
                         .WithMany()
@@ -446,7 +449,7 @@ namespace capstone.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("capstone.Models.TasksModel", "Tasks")
+                    b.HasOne("capstone.Models.Tasks", "Tasks")
                         .WithMany()
                         .HasForeignKey("Taskstask_id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -457,7 +460,7 @@ namespace capstone.Migrations
                     b.Navigation("Tasks");
                 });
 
-            modelBuilder.Entity("capstone.Models.TasksModel", b =>
+            modelBuilder.Entity("capstone.Models.Tasks", b =>
                 {
                     b.HasOne("capstone.Models.UserModel", "User")
                         .WithMany()
