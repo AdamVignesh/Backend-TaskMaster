@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using capstone.Data;
 using capstone.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Data;
 
 namespace capstone.Controllers
 {
@@ -55,32 +56,23 @@ namespace capstone.Controllers
         // PUT: api/ProjectsModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProjectsModel(int id, ProjectsModel projectsModel)
+        public async Task<IActionResult> PutProjectsModel(int id, int progress)
         {
-            if (id != projectsModel.Project_id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(projectsModel).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProjectsModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                var projectModel = _context.Projects.FirstOrDefault(t => t.Project_id == id);
 
-            return NoContent();
+                if (projectModel != null)
+                {
+                    projectModel.Project_Progress = progress;
+                    _context.SaveChanges();
+                }
+                return Ok("Updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
         }
 
         // POST: api/ProjectsModels

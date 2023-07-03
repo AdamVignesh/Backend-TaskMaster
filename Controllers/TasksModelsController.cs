@@ -53,34 +53,24 @@ namespace capstone.Controllers
         // PUT: api/TasksModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTasksModel(int id, TasksModel tasksModel)
+        public async Task<IActionResult> PutTasksModel(int id, string updatedStatus)
         {
-            if (id != tasksModel.task_id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tasksModel).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var tasksModel = _context.UserTasks.FirstOrDefault(t => t.task_id == id);
+
+                if (tasksModel != null)
+                {
+                    tasksModel.status = updatedStatus; 
+                    _context.SaveChanges();  
+                }
+                return Ok("Updated successfully");
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!TasksModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(500); 
             }
-
-            return NoContent();
         }
-
         // POST: api/TasksModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
