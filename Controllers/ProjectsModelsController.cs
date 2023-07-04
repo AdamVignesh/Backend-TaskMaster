@@ -37,6 +37,7 @@ namespace capstone.Controllers
             return await _context.Projects.ToListAsync();
         }
 
+
         // GET: api/ProjectsModels/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProjectsModel(string id)
@@ -52,6 +53,7 @@ namespace capstone.Controllers
 
             return Ok(new {projects});
         }
+
 
         // PUT: api/ProjectsModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

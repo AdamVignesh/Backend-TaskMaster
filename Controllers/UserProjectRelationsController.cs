@@ -62,6 +62,21 @@ namespace capstone.Controllers
             return Ok(userProjects);
         }
 
+
+        [HttpGet("getMemberImages/{project_id}")]
+        public async Task<ActionResult<UserProjectRelation>> GetUserImages(int project_id)
+        {
+            if (_context.UserProjectRelation == null)
+            {
+                return NotFound();
+            }
+            var userImages = _context.UserProjectRelation.Include(p => p.Projects).Include(p => p.User).Where(p => p.Projects.Project_id == project_id).Select(p => p.User.ImgUrl).ToList();
+
+
+
+            return Ok(new {imageUrl=userImages});
+        }
+
         // PUT: api/UserProjectRelations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
