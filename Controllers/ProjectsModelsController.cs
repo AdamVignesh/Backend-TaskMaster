@@ -77,6 +77,29 @@ namespace capstone.Controllers
             }
         }
 
+        [HttpPut("UpdateProjectStatus/{id}")]
+
+        public async Task<IActionResult> PutProjectStatusModel(int id, string status)
+        {
+            try
+            {
+                var projectModel = _context.Projects.FirstOrDefault(t => t.Project_id == id);
+
+                if (projectModel != null)
+                {
+                    projectModel.Project_Status = status;
+                    _context.SaveChanges();
+                }
+                return Ok("Updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
+
+
+
         // POST: api/ProjectsModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
