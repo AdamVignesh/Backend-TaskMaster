@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/taskmaster-apiservice/apis/taskmasterapi",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/taskmasterpro/providers/Microsoft.ServiceLinker/linkers/AZURE_SQL_CONNECTIONSTRING_3F43F39208",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/task-master-capstone-server/databases/taskmaster-db",
+      "type": "mssql.azure",
+      "connectionId": "AZURE_SQL_CONNECTIONSTRING",
+      "dynamicId": null
+    }
+  }
+}

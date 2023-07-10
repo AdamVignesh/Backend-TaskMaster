@@ -50,6 +50,26 @@ namespace capstone.Controllers
             return Ok(tasksOfprojectId);
         }
 
+
+        [HttpGet("tasksOfUser{id}")]
+        public async Task<ActionResult<TaskProjectRelationModel>> GetTasksOfUser(int id, string userId)
+        {
+            if (_context.TaskProjectRelationTable == null)
+            {
+                return NotFound();
+            }
+            var tasksOfUser = await _context.TaskProjectRelationTable.Include(p => p.Projects).Include(p => p.Tasks).Where(p => p.Projects.Project_id == id).Include(p => p.Tasks.User).Where(p=> p.Tasks.User.Id == userId).Select(p => p.Tasks).ToListAsync();
+
+            if (tasksOfUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tasksOfUser);
+        }
+
+
+
         // PUT: api/TaskProjectRelationModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

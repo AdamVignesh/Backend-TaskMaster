@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAoXEjr09v8U2oF/Hvw17oPQAAAAACAAAAAAAQZgAAAAEAACAAAABUo00vU3hnfi55lDQ+8bRvSjp5TYlLXx4ylK4423hFjgAAAAAOgAAAAAIAACAAAACGFzTo+RbtbHKgn4DuxbKW/PM9WcGST1I20Ug2dG7iNIAAAADcOa3P8+7DkiVgQisa4T/FmjKIGKd8C16DhAcF7rJUm0Vxr/Zce2sN3x3E43JpSQBzf0ODRjcJOvUMg/zqhD+2UgRbqE02CBDbtuY6JWwD7EJhSHiAyoAVj/yL2dDHQ66616Sb+l0lDqvbU5x7vMw4buBCtTHmId+SZ20/tdkiWEAAAAC3wkc2PqN7AiCiG+cPE7ESA+OtfqHIstqCQW+LQ+1JY+SQi98kmYS1uIMsZ/JLbaa7ixA6ptZt3RpI4oOhargB</EncryptedPassword>
+    <History>True|2023-07-10T06:17:16.9841405Z;True|2023-07-10T11:11:08.7636420+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Data Source=task-master-capstone-server.database.windows.net,1433;Initial Catalog=taskmaster-db;User ID=taskmaster;Password=Adam@123" />
+    <AzureDBConnectionStrings Include="Data Source=tcp:task-master-capstone-server.database.windows.net,1433;Initial Catalog=task_master_db;User Id=taskmaster@task-master-capstone-server;Password=Adam@123" />
+  </ItemGroup>
+</Project>

@@ -29,6 +29,15 @@ namespace capstone
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
+            builder.Services.ConfigureSwaggerGen(setup =>
+            {
+                setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Task Master",
+                    Version = "v1"
+                });
+            });
+
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>

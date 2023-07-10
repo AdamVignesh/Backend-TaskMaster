@@ -50,6 +50,26 @@ namespace capstone.Controllers
             return tasksModel;
         }
 
+        [HttpGet("TasksForTheDay{userId}")]
+        public async Task<ActionResult<TasksModel>> GetTasksForTheDay(string userId)
+        {
+            if (_context.UserTasks == null)
+            {
+                return NotFound();
+            }
+            DateTime today = DateTime.Today;
+            Console.WriteLine("----------------------" + today);
+            var tasksForTheDay = await _context.UserTasks.Where(t => t.User.Id == userId && t.deadline.Date == today).ToListAsync() ;
+
+            if (tasksForTheDay == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tasksForTheDay);
+        }
+
+
         // PUT: api/TasksModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
