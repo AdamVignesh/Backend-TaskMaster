@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Web;
 
 namespace capstone.Controllers
 {
@@ -39,10 +41,19 @@ namespace capstone.Controllers
                     Console.WriteLine(model.Name+"==================================================");
                     var user = new UserModel { UserName = model.Name, Email = model.Email, Role = model.Role,ImgUrl=model.ImgUrl};
                     var result = await _userManager.CreateAsync(user, model.Password);
-                Console.WriteLine(user + "==================================================");
+                    Console.WriteLine(user + "==================================================");
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var encodedToken = HttpUtility.UrlEncode(token);
+                    Console.WriteLine(encodedToken);
+                    var confirmationLink = "https://taskmasterpro.azurewebsites.net/api/controller/confirm-email?userId=" + user.Id + "&token=" + encodedToken;
+
 
                 if (result.Succeeded)
                     {
+
+                        String emailSubject = "TaskMaster Account Verification";
+                        String emailMessage = $"<div><h1>Task Master</h1><a href=\"{confirmationLink}\">Click here to Verify!</a></div>";
+                        sendConfirmationEmail(emailSubject, emailMessage, user.Email);
                         return Ok("Registered");
                     }
                     else
@@ -62,6 +73,8 @@ namespace capstone.Controllers
         }
 
 
+
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(Login model)
         {
@@ -75,7 +88,8 @@ namespace capstone.Controllers
                 }
                 var result = await _userManager.CheckPasswordAsync(user, model.Password);
                 Console.WriteLine(result + "============result=======");
-                if (result)
+
+                if (result && user.EmailConfirmed)
                 {
                     String token =  CreateToken(user);
                     return Ok(token);
@@ -141,6 +155,60 @@ namespace capstone.Controllers
             }
             return BadRequest("Invaild Access Token");
         }
+
+        private void sendConfirmationEmail(String emailSubject, String emailMessage, String toEmail)
+        {
+            toEmail = "vighu1610@gmail.com";//for testing purposes
+            try
+            {
+                Console.WriteLine("in SendEmailConfirm");
+                string fromPassword = "jioxrxaavdwhnylv";
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse("testname1234554321@gmail.com"));
+                email.To.Add(MailboxAddress.Parse(toEmail));
+                email.Subject = emailSubject;
+
+                email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                {
+                    Text = emailMessage,
+
+                };
+
+                using var smtp = new MailKit.Net.Smtp.SmtpClient();
+                smtp.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+
+                smtp.Authenticate("testname1234554321@gmail.com", fromPassword);
+
+                smtp.Send(email);
+                smtp.Disconnect(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            Console.WriteLine(userId);
+            Console.WriteLine(token);
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            Console.WriteLine(result);
+            if (result.Succeeded)
+            {
+                return Ok("Email confirmed successfully.");
+            }
+
+            return BadRequest("Email confirmation failed.");
+        }
+
 
         private string CreateToken(UserModel user)
         {

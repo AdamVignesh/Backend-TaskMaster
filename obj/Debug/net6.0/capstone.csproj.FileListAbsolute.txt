@@ -373,3 +373,11 @@ C:\Users\HP\Desktop\Backend-TaskMaster\obj\Debug\net6.0\refint\capstone.dll
 C:\Users\HP\Desktop\Backend-TaskMaster\obj\Debug\net6.0\capstone.pdb
 C:\Users\HP\Desktop\Backend-TaskMaster\obj\Debug\net6.0\capstone.genruntimeconfig.cache
 C:\Users\HP\Desktop\Backend-TaskMaster\obj\Debug\net6.0\ref\capstone.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\MailKit.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\MimeKit.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\HP\Desktop\Backend-TaskMaster\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
